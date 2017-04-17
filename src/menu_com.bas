@@ -1,0 +1,44 @@
+1 POKE #BBA4,0
+2 POKE #26A,14
+10 CLS
+20 PAPER0
+30 INK 7
+40 PRINT"======================================"
+50 PRINT CHR$(27);"T";
+70 PRINT CHR$(27);"A";
+75 PRINT CHR$(27);"J";
+80 PRINT "ORIC GIGA DEMO BY DEFENCE-FORCE"
+90 PRINT CHR$(27);"T";
+100 PRINT CHR$(27);"C";
+110 PRINT CHR$(27);"J";
+120 PRINT "ORIC GIGA DEMO BY DEFENCE-FORCE"
+130 PRINT"======================================"
+135 PRINT""
+140 PRINT"Presented and rated #1 at the VIP3"
+150 PRINT"July 2001"
+160 PRINT""
+170 PRINT"HTTP://WWW.ORIC-INTERNATIONAL.COM"
+180 PRINT"HTTP://WWW.DEFENCE-FORCE.ORG"
+189 PRINT"
+190 PRINT"--------------------------------------"
+191 PRINT""
+200 PRINT"Code : Dbug, Jede, Twilighte"
+205 PRINT
+210 PRINT"Gfx : Eaks, Twilighte"
+215 PRINT
+220 PRINT"Music : Twilighte"
+235 PRINT
+240 PRINTCHR$(96);:PRINT" Defence-Force 2001"
+245 PRINT:PRINT
+1000 PRINT"======================================" 
+1009 PRINT CHR$(27);"T";
+1010 PRINT CHR$(27);"A";
+1020 PRINT CHR$(27);"N";
+1030 PRINT "     PRESS ANY KEY TO START"
+1033 PRINT CHR$(27);"T";
+1034 PRINT CHR$(27);"C"; 
+1035 PRINT CHR$(27);"N";
+1040 PRINT "     PRESS ANY KEY TO START"
+2000 PRINT"======================================"
+2020 GET A$
+2030 !DISK.COM
