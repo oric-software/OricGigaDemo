@@ -53,17 +53,20 @@ SetCompressionMode None 						; So far only two modes: 'None' and 'FilePack'
 ;
 AddDefine LOADER_FIRST_PART {FileIndex}
 
-AddFile "..\Extraction\introBars.bin"   $1000
 
-AddFile "..\Extraction\displayExocetMoon.bin"   $0800
-AddFile "..\Extraction\scrollChessboard.bin"   $0800
-AddFile "..\Extraction\File_3.bin"   $0800
-AddFile "..\Extraction\File_4.bin"   $0800
-AddFile "..\Extraction\File_5.bin"   $0800
-AddFile "..\Extraction\File_6.bin"   $0800
-AddFile "..\Extraction\File_7.bin"   $0800
-AddFile "..\Extraction\File_8.bin"   $0800
-AddFile "..\Extraction\File_9.bin"   $0800
+
+AddFile "..\Extraction\rotozoom.bin"   $0800
+AddFile "..\Extraction\introBars.bin"   $1000
+AddFile "..\Extraction\concentricCircles.bin"   $0800
+
+;AddFile "..\Extraction\3D_building.bin"   $0800
+
+
+
+;AddFile "..\Extraction\File_6.bin"   $0800
+;AddFile "..\Extraction\File_7.bin"   $0800
+;AddFile "..\Extraction\File_8.bin"   $0800
+
 
 AddFile "..\Extraction\File_10.bin"  $0A00
 AddFile "..\Extraction\File_11.bin"  $0A00
@@ -115,6 +118,37 @@ AddFile "..\Extraction\File_56.bin"  $0A00
 AddFile "..\Extraction\File_57.bin"  $0A00
 AddFile "..\Extraction\File_58.bin"  $0A00
 AddFile "..\Extraction\File_59.bin"  $0A00
+
+
+
+
+
+
+
+
+
+
+;
+
+
+
+
+
+
+
+AddFile "..\Extraction\scrollChessboard.bin"   $0800
+
+
+
+
+; Marchera pas car appel à la ROM
+AddFile "..\Extraction\displayExocetMoon.bin"   $0800
+
+
+
+
+;SaveFile "Plasma.bin"  $90 $11 $0C 
+
 ;AddFile "..\Extraction\File_60.bin"  $6000
 ;AddFile "..\Extraction\File_61.bin"  $DC00
 ;AddFile "..\Extraction\File_62.bin"  $0000

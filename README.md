@@ -11,7 +11,7 @@ How to build :
 
 1) Use extract.bat
 
-In Extraction, you will find a lot of files.
+In Extraction folder, you will find a lot of files.
 
 2) Edit with a hex editor introBars.bar
 	replace the 3 first bytes ($20 $33 $20) with $ea $ea $ea
