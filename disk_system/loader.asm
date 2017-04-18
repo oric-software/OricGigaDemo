@@ -47,6 +47,15 @@ fdc_register_offset		.dsb 1
 StartUp
 	stx fdc_register_offset				; Store the FDC offset value
 
+	; copy stub
+	ldx #0
+loopfill	
+	lda  stub_to_activate_rom_and_return,x
+	sta $400,x
+	inx 
+	bne loopfill
+	
+	
 	; Load the slideshow
 	ldx #LOADER_FIRST_PART
 	jsr LoadAndRun
@@ -62,10 +71,29 @@ LoadAndRun
 	;lda #%10000010 			; Enable the BASIC ROM
 	;sta FDC_flags
 
+	; Stub in order to have basicROM
+	lda	__auto_execute_address+1
+	sta $407
+	lda	__auto_execute_address+2
+	sta $408
+	
+	jmp $400
+
 	; Give control to the application and hope it knows what to do
 __auto_execute_address
 	jmp $a000
-		
+	
+stub_to_activate_rom_and_return
+	sei ; $400 
+	lda #%10000010 			; Enable the BASIC ROM ; $401 $402
+	sta FDC_flags ; $403 $404 $405
+	jsr $a000  
+	
+	lda #%10000000 			; Enable the BASIC ROM ; $401 $402
+	sta FDC_flags ; $403 $404
+	
+	rts
+	
 		
 IrqHandler
 	sta irq_save_a

@@ -53,10 +53,16 @@ SetCompressionMode None 						; So far only two modes: 'None' and 'FilePack'
 ;
 AddDefine LOADER_FIRST_PART {FileIndex}
 
+AddFile "..\Extraction\introBars.bin"   $1000
 
+AddFile "..\Extraction\displayExocetMoon.bin"   $0800
 
 AddFile "..\Extraction\rotozoom.bin"   $0800
-AddFile "..\Extraction\introBars.bin"   $1000
+
+
+
+
+
 AddFile "..\Extraction\concentricCircles.bin"   $0800
 
 ;AddFile "..\Extraction\3D_building.bin"   $0800
@@ -142,7 +148,7 @@ AddFile "..\Extraction\scrollChessboard.bin"   $0800
 
 
 ; Marchera pas car appel à la ROM
-AddFile "..\Extraction\displayExocetMoon.bin"   $0800
+
 
 
 
