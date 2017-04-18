@@ -1,0 +1,73 @@
+========================================
+ORIC DEMO - VIP3 Party version (No Sound)
+========================================
+
+About this version:
+-------------------
+This is the Oric demo that won (well we were the only ones in the OldSkool 
+compo) the OldSkool compo at the VIP 3.
+
+Due to technical problems, we are unable to make this version works with the 
+sound.
+ 
+
+How to run it:
+--------------
+This version is autobooting.
+
+Well, right now, you just have to do the following:
+
+1) First, you need to be sure that the files are in one single folder called
+"ORICVIP3" that is located at the root of the "C:" drive. If it's not the
+case, it will not run. This version of the emulator is stripped to down to a
+minimum, if you want to install it somewhere else, you'll have to change the
+path references in the "euphoric.ini" and "r.bat" files.
+
+2) Run the "C:\ORICVIP3\R.BAT" file. 
+This will run the emulator, press any key after the detection of devices,
+and look at the emulator boot on the DSK file.
+
+3) When you see the intro, press SPACE to launch the demo.
+
+4) Just look and appreciate. There is no music, that's normal. At the end, 
+the demo is turning in infinite loop, so just press F10 to quit the emulator.
+Good luck.
+
+
+Credits:
+--------
+Jede (code, loader, website, data integration)
+Twilighte (code, music, picture conversion)
+Dbug (code)
+??? (logos)
+Kouiskas (defence force logo in Disc part)
+Exocet (monochrome picture)
+Various people (greetings logos)
+
+
+Some stats for the demo:
+------------------------
+64 files taken 273894 bytes
+Duration: 7 mn 10 s
+Note : keyboard is active during the demo !!! 10% of CPU time lost !!!
+
+
+To contact us:
+--------------
+Jede 
+	- jede@ifrance.com
+	- http://www.oric-international.com
+	
+Twilighte
+	- arc@twilighte.freeserve.co.uk
+	- http://www.twilighte.freeserve.co.uk/twinew/rhetoric/rhetoric.htm
+	
+Dbug
+	- dbug@defence-force.org
+	- http://www.defence-force.org
+	- http://www.defence-force.org/computing/oric/index.htm
+
+ 
+ 
+
+ 

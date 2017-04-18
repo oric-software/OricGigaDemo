@@ -1,0 +1,195 @@
+;
+; **** ZP ABSOLUTE ADRESSES **** 
+;
+index_logo = $4F
+;
+; **** USER LABELS **** 
+;
+current_sector = $0200
+current_track = $0201
+load_counter = $0202
+current_drive = $0203
+buffer_low = $0204
+buffer_high = $0205
+file_index = $0206
+sedoric_swap_overlay = $04F2
+sedoric_romram_flag = $04FB
+run_0800 = $0800
+run_1000 = $1000
+run_765a = $765A
+sedoric_drive = $C000
+sedoric_track = $C001
+sedoric_sector = $C002
+sedoric_buffer_low = $C003
+sedoric_buffer_high = $C004
+rom_hires = $EC33
+rom_init_charsets = $F8D0
+sedoric_read_sector = $FFB8
+
+        * = $050A
+
+        JSR initialize
+        LDX #$00
+        JSR load_file
+        JSR run_1000
+        LDX #$01
+        JSR load_file
+        JSR run_0800
+        LDY #$FF
+loop_wait JSR wait
+        INY 
+        BNE loop_wait
+        LDX #$05
+        JSR load_file
+        JSR run_0800
+        JSR rom_hires
+        LDX #$03
+        JSR load_file
+        JSR run_0800
+        LDX #$02
+        JSR load_file
+        JSR run_0800
+        JSR rom_init_charsets
+        JSR rom_hires
+        LDX #$04
+        JSR load_file
+        JSR run_0800
+        LDX #$06
+        JSR load_file
+        LDA #$00
+        STA index_logo
+logo_patch_index   =*+$01
+loop_load_logo LDX #$0A
+        JSR load_file
+        JSR run_0800
+        INC index_logo
+        INC logo_patch_index
+        JSR wait
+        JSR wait
+        LDX index_logo
+        CPX #$33
+        BNE loop_load_logo
+        LDX #$07
+        JSR load_file
+        JSR run_0800
+        LDX #$08
+        JSR load_file
+        JSR run_0800
+        LDX #$09
+        JSR load_file
+        JSR run_0800
+        JSR rom_hires
+        LDX #$3D
+        JSR load_file
+        JSR run_765a
+        RTS 
+
+load_file STX file_index
+        JSR fetch_file_info
+load_loop JSR find_next_sector
+        INC current_sector
+        DEC load_counter
+        BNE load_loop
+        JSR find_next_sector
+        RTS 
+
+fetch_file_info LDX file_index
+        LDA table_sectors,X
+        STA current_sector
+        LDA table_drives
+        STA current_drive
+        LDA table_tracks,X
+        STA current_track
+        LDA table_addresses_low
+        STA buffer_low
+        LDA table_addresses_high,X
+        STA buffer_high
+        LDA table_sector_count,X
+        STA load_counter
+        RTS 
+
+find_next_sector JSR load_sector
+        INC buffer_high
+        LDA current_sector
+        CMP #$11
+        BNE same_track
+        INC current_track
+        LDA #$00
+        STA current_sector
+same_track RTS 
+
+wait    PHA 
+        TXA 
+        PHA 
+        TYA 
+        PHA 
+        LDY #$00
+incrementation2 LDX #$00
+incrementation22 INX 
+        BNE incrementation22
+        INY 
+        BNE incrementation2
+        PLA 
+        TAY 
+        PLA 
+        TAX 
+        PLA 
+        RTS 
+
+initialize LDA #$00
+        STA file_index
+        LDA #$86
+        STA sedoric_romram_flag
+        RTS 
+
+load_sector JSR sedoric_swap_overlay
+        LDA buffer_low
+        STA sedoric_buffer_low
+        LDA buffer_high
+        STA sedoric_buffer_high
+        LDA current_drive
+        STA sedoric_drive
+        LDA current_track
+        STA sedoric_track
+        LDA current_sector
+        STA sedoric_sector
+        JSR sedoric_read_sector
+        JSR sedoric_swap_overlay
+        RTS 
+
+table_drives .BYTE $00
+table_sectors .BYTE $01,$05,$05,$06,$07,$11,$0D,$07
+        .BYTE $0F,$11,$07,$0F,$06,$0E,$01,$09
+        .BYTE $11,$08,$10,$07,$0F,$06,$0E,$05
+        .BYTE $0D,$04,$0C,$03,$0B,$02,$0A,$01
+        .BYTE $09,$11,$08,$10,$07,$0F,$06,$0E
+        .BYTE $05,$01,$09,$11,$08,$10,$07,$0F
+        .BYTE $06,$0E,$05,$0D,$04,$0C,$03,$0B
+        .BYTE $02,$0A,$01,$09,$11,$08,$02
+table_tracks .BYTE $80,$84,$86,$88,$90,$90,$91,$92
+        .BYTE $95,$9C,$A5,$A5,$A6,$A6,$07,$07
+        .BYTE $07,$08,$08,$09,$09,$0A,$0A,$0B
+        .BYTE $0B,$0C,$0C,$0D,$0D,$0E,$0E,$0F
+        .BYTE $0F,$0F,$10,$10,$11,$11,$12,$12
+        .BYTE $13,$15,$15,$15,$16,$16,$17,$17
+        .BYTE $18,$18,$19,$19,$1A,$1A,$1B,$1B
+        .BYTE $1C,$1C,$1D,$1D,$1D,$1E,$24
+table_sector_count .BYTE $47,$21
+        .BYTE $22,$88,$09,$0C,$0A,$3A,$78,$8E
+        .BYTE $07,$07,$07,$07,$07,$07,$07,$07
+        .BYTE $07,$07,$07,$07,$07,$07,$07,$07
+        .BYTE $07,$07,$07,$07,$07,$07,$07,$07
+        .BYTE $07,$07,$07,$07,$07,$07,$07,$07
+        .BYTE $07,$07,$07,$07,$07,$07,$07,$07
+        .BYTE $07,$07,$07,$07,$07,$07,$07,$07
+        .BYTE $07,$07,$07,$5F,$0E
+table_addresses_low .BYTE $00
+table_addresses_high .BYTE $10,$08,$08,$08,$08,$08,$08,$08
+        .BYTE $08,$08,$0A,$0A,$0A,$0A,$0A,$0A
+        .BYTE $0A,$0A,$0A,$0A,$0A,$0A,$0A,$0A
+        .BYTE $0A,$0A,$0A,$0A,$0A,$0A,$0A,$0A
+        .BYTE $0A,$0A,$0A,$0A,$0A,$0A,$0A,$0A
+        .BYTE $0A,$0A,$0A,$0A,$0A,$0A,$0A,$0A
+        .BYTE $0A,$0A,$0A,$0A,$0A,$0A,$0A,$0A
+        .BYTE $0A,$0A,$0A,$0A,$0A,$60
+        .BYTE $DC,$00,$00

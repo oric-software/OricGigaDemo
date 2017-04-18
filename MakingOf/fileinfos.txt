@@ -1,0 +1,26 @@
+LOAD"DISK.COM",V   <- Give information about the file
+LOAD"MENU.COM",N   <- Load the file without starting it
+
+menu.com  -> 5kb -> 5-15-64  -> 0501 08D5 81 008C
+disk.com  -> 4kb -> 6-3-64   -> 050A 0800 41 050A
+
+
+LOAD"MENU.COM",N
+CSAVE"MENU.TAP"
+LOAD"DISK.COM",V
+-> 050A 0800 41 050A
+LOAD"DISK.COM",N
+CSAVE"DISK.TAP",A#050A,E#0800
+
+D:\svn\public\oric\demos\OricGigaDemo>%osdk%/bin/header -h0 DISK.TAP disk.prg
+File 'disk.prg' is 759 bytes long (0 bytes header and 759 bytes of data)
+
+HexEditor -> add 0A 05 header so the prg can be loaded from Regenerator 1.3 disassembler.
+(author: Tom-Cat (Tomaz Kac) - tomcat@sgn.net)
+
+Pure dos supposedly better alternative (suggested by iAN CooG):
+http://csdb.dk/release/?id=129971 / http://ist.uwaterloo.ca/~schepers/personal.html
+
+
+Hello Mickael, je n'arrive pas à te répondre dans la fil de discussion aussi je t'envoie le lien dans un message privé: https://www.facebook.com/photo.php?fbid=1993263583630&set=t.100002511650916&type=3&theater tu peux l'utiliser à ta convenance, n'oublie pas de nommer l'auteur, c'est à dire moi: David "Flan" Delattre 
+

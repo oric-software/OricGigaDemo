@@ -1,21 +1,32 @@
 LoadDiskTemplate original_vip3.dsk
 
-; SaveFile "File_0.bin"  $80 $01 $47  ; Name Track Sector Lenght adress
 
-SaveFile "2faces.bin" $1E $08 $5F 
 
-; Should be less than 7 sector
-SaveFile "jede.bin" $05 $01 $07 
+; Ordre de chargement (index) : 0,1,5,3,2,4
 
-; Should be less than 7 sector
-SaveFile "helptxtscreen.bin" $06 $01 $07 
+;0
+SaveFile "introBars.bin"  $80 $01 $47  ; Name Track Sector Lenght adress
 
-SaveFile "File_0.bin"  $80 $01 $47 
-SaveFile "File_1.bin"  $84 $05 $21 
-SaveFile "File_2.bin"  $86 $05 $22 
-SaveFile "File_3.bin"  $88 $06 $88 
-SaveFile "File_4.bin"  $90 $07 $09 
-SaveFile "File_5.bin"  $90 $11 $0C 
+
+;1
+SaveFile "displayExocetMoon.bin"  $84 $05 $21 
+
+;5 
+SaveFile "scrollChessboard.bin"  $86 $05 $22 
+
+;3
+SaveFile "concentricCircles.bin"  $88 $06 $88 
+
+;2
+SaveFile "multiScroll.bin"  $90 $07 $09 
+
+;4
+SaveFile "Plasma.bin"  $90 $11 $0C 
+
+
+
+
+
 SaveFile "File_6.bin"  $91 $0D $0A 
 SaveFile "File_7.bin"  $92 $07 $3A 
 SaveFile "File_8.bin"  $95 $0F $78 
@@ -77,6 +88,13 @@ SaveFile "File_59.bin" $1D $09 $07
 ;SaveFile "File_62.bin" $24 $02 $0E 
 
 
+;SaveFile "2faces.bin" $1E $08 $5F 
+
+; Should be less than 7 sector
+;SaveFile "jede.bin" $05 $01 $07 
+
+; Should be less than 7 sector
+;SaveFile "helptxtscreen.bin" $06 $01 $07 
 
 ; 
 ; table_addresses_high 

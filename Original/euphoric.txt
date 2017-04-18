@@ -1,0 +1,33 @@
+       Environment Screen
+Disk A:
+Disk B:
+Disk C:
+Disk D:
+Hardware Tape :
+YES
+NO
+Tape :
+Controls :
+<>: pos., ENTER: record, SPACE: play
+SPACE: stop
+Show/Hide Drives
+Pos :
+Clock Speed :
+Sound :
+Keyboard :
+ASCII
+Raw
+Printer :
+On
+SYNC link to TAPE IN :
+Off
+Return  Sound  Keyboard Double Initial
+to Oric On/Off ASCII/Raw Clock  Clock
+Jasmin  Reset   Power   Dump    Quit
+Reset           Reset  & Quit
+DEL: eject, Left/Right: protect on/off
+ENTER: select, SPACE: insert blank disk
+Up/Down: move cursor
+ENTER: modify
+ENTER: select, SPACE: insert blank tape
+Left/Right: adjust

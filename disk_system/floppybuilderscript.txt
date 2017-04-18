@@ -1,0 +1,121 @@
+;
+; Here is the current documentation for the description script.
+; - This file describes what goes on the floppy itself, list of files, boot sectors, locations, ...
+; - The result is stored in a description file which along with the loader code allows the user to load data.
+;
+; Syntax:
+; - Anything at the right of a ; is ignored (commented out)
+; - {FileIndex} is replaced at generation time by the current internal file index, practical for defines generation
+;
+; Things to do:
+; - Be able to define the format of the floppy we want in this file (number of tracks, sectors, sizes)
+; - Suppress the need for a source floppy to clone from
+; - Have a 0/1 parameter for the multiple calls to the tool, with only the last one needing the files
+; - Support for tap files (auto-detect loading area)
+; - Support for file compression in the tool
+; - Possibility to do partial loads, saves, depacking in realtime
+;
+;LoadDiskTemplate default.dsk
+DefineDisk 2 42 17							; 2 sides, 42 tracks, 17 sectors
+
+OutputLayoutFile floppy_description.h
+OutputFloppyFile ..\build\GIGADEMO.dsk
+
+;AddDefine LOADER_SHOW_DEBUGINFO 1
+
+;
+; This defines the bootsectors to use for the various operating systems
+; - Jasmin loads the sector 1 of track zero in $400 and then runs it.
+; - Microdisc loads the sector 2 of track zero, the address is different on Atmos and Telestrat
+; - The system requires a third sector containing valid data
+;
+; Since we do not yet have a valid Jasmin reading code, all this bootsector will do is to 
+; write a message saying that this floppy needs to be booted on a Microdisc compatible system.
+;
+SetPosition 0 1
+WriteSector ..\build\files\sector_1-jasmin.o 		; Sector 1
+WriteSector ..\build\files\sector_2-microdisc.o 	; Sector 2
+WriteSector ..\build\files\sector_3.o 				; Sector 3
+
+;
+; Now here is the loader code, that one is Microdisc only
+;
+SetPosition 0 4
+AddFile ..\build\files\loader.o $fc00 				; Sector 4
+
+;
+; From now on we compress data (The loader should not be compressed)
+;
+SetCompressionMode None 						; So far only two modes: 'None' and 'FilePack'
+
+;
+; Then the files used in the demo
+;
+AddDefine LOADER_FIRST_PART {FileIndex}
+
+AddFile "..\Extraction\introBars.bin"   $1000
+
+AddFile "..\Extraction\displayExocetMoon.bin"   $0800
+AddFile "..\Extraction\scrollChessboard.bin"   $0800
+AddFile "..\Extraction\File_3.bin"   $0800
+AddFile "..\Extraction\File_4.bin"   $0800
+AddFile "..\Extraction\File_5.bin"   $0800
+AddFile "..\Extraction\File_6.bin"   $0800
+AddFile "..\Extraction\File_7.bin"   $0800
+AddFile "..\Extraction\File_8.bin"   $0800
+AddFile "..\Extraction\File_9.bin"   $0800
+
+AddFile "..\Extraction\File_10.bin"  $0A00
+AddFile "..\Extraction\File_11.bin"  $0A00
+AddFile "..\Extraction\File_12.bin"  $0A00
+AddFile "..\Extraction\File_13.bin"  $0A00
+AddFile "..\Extraction\File_14.bin"  $0A00
+AddFile "..\Extraction\File_15.bin"  $0A00
+AddFile "..\Extraction\File_16.bin"  $0A00
+AddFile "..\Extraction\File_17.bin"  $0A00
+AddFile "..\Extraction\File_18.bin"  $0A00
+AddFile "..\Extraction\File_19.bin"  $0A00
+AddFile "..\Extraction\File_20.bin"  $0A00
+AddFile "..\Extraction\File_21.bin"  $0A00
+AddFile "..\Extraction\File_22.bin"  $0A00
+AddFile "..\Extraction\File_23.bin"  $0A00
+AddFile "..\Extraction\File_24.bin"  $0A00
+AddFile "..\Extraction\File_25.bin"  $0A00
+AddFile "..\Extraction\File_26.bin"  $0A00
+AddFile "..\Extraction\File_27.bin"  $0A00
+AddFile "..\Extraction\File_28.bin"  $0A00
+AddFile "..\Extraction\File_29.bin"  $0A00
+AddFile "..\Extraction\File_30.bin"  $0A00
+AddFile "..\Extraction\File_31.bin"  $0A00
+AddFile "..\Extraction\File_32.bin"  $0A00
+AddFile "..\Extraction\File_33.bin"  $0A00
+AddFile "..\Extraction\File_34.bin"  $0A00
+AddFile "..\Extraction\File_35.bin"  $0A00
+AddFile "..\Extraction\File_36.bin"  $0A00
+AddFile "..\Extraction\File_37.bin"  $0A00
+AddFile "..\Extraction\File_38.bin"  $0A00
+AddFile "..\Extraction\File_39.bin"  $0A00
+AddFile "..\Extraction\File_40.bin"  $0A00
+AddFile "..\Extraction\File_41.bin"  $0A00
+AddFile "..\Extraction\File_42.bin"  $0A00
+AddFile "..\Extraction\File_43.bin"  $0A00
+AddFile "..\Extraction\File_44.bin"  $0A00
+AddFile "..\Extraction\File_45.bin"  $0A00
+AddFile "..\Extraction\File_46.bin"  $0A00
+AddFile "..\Extraction\File_47.bin"  $0A00
+AddFile "..\Extraction\File_48.bin"  $0A00
+AddFile "..\Extraction\File_49.bin"  $0A00
+AddFile "..\Extraction\File_50.bin"  $0A00
+AddFile "..\Extraction\File_51.bin"  $0A00
+AddFile "..\Extraction\File_52.bin"  $0A00
+AddFile "..\Extraction\File_53.bin"  $0A00
+AddFile "..\Extraction\File_54.bin"  $0A00
+AddFile "..\Extraction\File_55.bin"  $0A00
+AddFile "..\Extraction\File_56.bin"  $0A00
+AddFile "..\Extraction\File_57.bin"  $0A00
+AddFile "..\Extraction\File_58.bin"  $0A00
+AddFile "..\Extraction\File_59.bin"  $0A00
+;AddFile "..\Extraction\File_60.bin"  $6000
+;AddFile "..\Extraction\File_61.bin"  $DC00
+;AddFile "..\Extraction\File_62.bin"  $0000
+
